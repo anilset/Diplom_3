@@ -30,6 +30,7 @@ public class WevDriverFactory {
             driver.navigate().to(URL);
             new WebDriverWait(driver, 10)
                     .until(ExpectedConditions.visibilityOfElementLocated(LOGO));
+            driver.manage().window().maximize();
             return driver;
         }
 }

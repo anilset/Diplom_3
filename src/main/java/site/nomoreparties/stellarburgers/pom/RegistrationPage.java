@@ -3,22 +3,20 @@ package site.nomoreparties.stellarburgers.pom;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-
-import static site.nomoreparties.stellarburgers.pom.LoginPage.LOGIN_PAGE_HEADER;
+import java.util.concurrent.TimeUnit;
 
 public class RegistrationPage {
-    final WebDriver driver;
-    final static By REGISTER_PAGE_HEADER = By.xpath("//h2[text()='Регистрация']");
-    final By nameField = By.xpath ("//fieldset[1]/div[1]/div[1]/input[1]");
-    final By emailField = By.xpath("//fieldset[2]/div[1]/div[1]/input[1]");
-    final By pwdField = By.xpath("//fieldset[3]/div[1]/div[1]/input[1]");
-    final By pwdError = By.xpath("//*[contains(@class,'error')]");
-    final  By registerButton = By.xpath("//button[text()='Зарегистрироваться']");
-    public RegistrationPage(WebDriver driver) {
+   private final WebDriver driver;
+   final static By REGISTER_PAGE_HEADER = By.xpath("//h2[text()='Регистрация']");
+   private final By nameField = By.xpath ("//fieldset[1]/div[1]/div[1]/input[1]");
+   private final By emailField = By.xpath("//fieldset[2]/div[1]/div[1]/input[1]");
+   private final By pwdField = By.xpath("//fieldset[3]/div[1]/div[1]/input[1]");
+   private final By pwdError = By.xpath("//*[text()='Некорректный пароль']");
+   private final  By registerButton = By.xpath("//button[text()='Зарегистрироваться']");
+
+   public RegistrationPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -42,8 +40,7 @@ public class RegistrationPage {
     public LoginPage clickRegisterButton(){
         driver.findElement(registerButton).isEnabled();
         driver.findElement(registerButton).click();
-        /*new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(LOGIN_PAGE_HEADER));*/
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         return new LoginPage(driver);
     }
 

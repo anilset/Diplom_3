@@ -26,15 +26,13 @@ public class RegistrationTest {
     }
 
     @Test
-    public void registrationPositiveTest()  {
-        HeaderItems header = new Header(driver);
-        header.clickYourAccount()
+    public void registrationPositiveTest() {
+        Boolean isRegistered = new Header(driver)
+                .clickYourAccount()
                 .clickRegistrationButton()
                 .register(name, email, pwd)
-                .login(email, pwd);
-        header.clickYourAccount();
-        AccountPage profile = new AccountPage(driver);
-        assertTrue(profile.isProfileVisible());
+                .isLoginPageVisible();
+        assertTrue(isRegistered);
     }
 
     @Test

@@ -6,17 +6,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static site.nomoreparties.stellarburgers.pom.BurgerPage.BURGER_PAGE_HEADER;
 import static site.nomoreparties.stellarburgers.pom.RegistrationPage.REGISTER_PAGE_HEADER;
 
 public class LoginPage {
-    final WebDriver driver;
-    final static By LOGIN_PAGE_HEADER = By.xpath("//h2[text()='Вход']");
-    final static By emailField = By.name("name");
-    final By pwdField = By.name("Пароль");
-    final By enterButton = By.xpath("//*[text()='Войти']");
+    private final WebDriver driver;
+    private final static By LOGIN_PAGE_HEADER = By.xpath("//h2[text()='Вход']");
+    private final static By emailField = By.name("name");
+    private final By pwdField = By.name("Пароль");
+    private final By enterButton = By.xpath("//*[text()='Войти']");
 
     final By registrationButton = By.xpath("//a[text()='Зарегистрироваться']");
 
@@ -40,33 +40,28 @@ public class LoginPage {
     public LoginPage inputPwd(String pwd){
         driver.findElement(pwdField).clear();
         driver.findElement(pwdField).sendKeys(pwd);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         return this;
     }
 
-    public BurgerPage clickEnterButton() {
-        driver.findElement(enterButton).isEnabled();
+    public BurgerMainPage clickEnterButton() {
         driver.findElement(enterButton).click();
-        /*new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(BURGER_PAGE_HEADER));*/
-        return new BurgerPage(driver);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        return new BurgerMainPage(driver);
     }
 
-    public BurgerPage login(String email, String pwd) {
+    public BurgerMainPage login(String email, String pwd) {
         inputEmail(email);
         inputPwd(pwd);
         clickEnterButton();
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(BURGER_PAGE_HEADER));
-        return new BurgerPage(driver);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        return new BurgerMainPage(driver);
     }
 
-    public WebElement getEmailField() {
-        WebElement emailInputField = driver.findElement(emailField);
-        return emailInputField;
+    public Boolean isLoginPageVisible(){
+        List<WebElement> loginHeader = driver.findElements(LOGIN_PAGE_HEADER);
+        return loginHeader.size() >= 1;
     }
-    /* public Boolean isLoginPageVisible(){
-
-    }*/
 
 
 }
