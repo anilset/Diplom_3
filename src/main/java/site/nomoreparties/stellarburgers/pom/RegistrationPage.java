@@ -15,7 +15,7 @@ public class RegistrationPage {
    private final By pwdField = By.xpath("//fieldset[3]/div[1]/div[1]/input[1]");
    private final By pwdError = By.xpath("//*[text()='Некорректный пароль']");
    private final  By registerButton = By.xpath("//button[text()='Зарегистрироваться']");
-
+    private final By enterButton = By.xpath("//*[text()='Войти']");
    public RegistrationPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -49,6 +49,12 @@ public class RegistrationPage {
         inputEmail(email);
         inputPwd(pwd);
         clickRegisterButton();
+        return new LoginPage(driver);
+    }
+
+    public LoginPage clickEnterButton() {
+        driver.findElement(enterButton).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         return new LoginPage(driver);
     }
 

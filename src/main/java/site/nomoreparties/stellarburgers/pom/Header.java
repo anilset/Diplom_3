@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.concurrent.TimeUnit;
 
 public class Header implements HeaderItems{
-    final WebDriver driver;
+    private final WebDriver driver;
     public static final By LOGO = By.xpath("//*[@class='AppHeader_header__logo__2D0X2']");
     private final By constructor = By.xpath("//p[text()='Конструктор']");
     private final By ordersButton = By.xpath("//p[text()='Лента Заказов']");

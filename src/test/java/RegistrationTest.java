@@ -1,3 +1,5 @@
+import io.restassured.RestAssured;
+import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +12,7 @@ import site.nomoreparties.stellarburgers.pom.HeaderItems;
 import site.nomoreparties.stellarburgers.pom.RegistrationPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static site.nomoreparties.stellarburgers.config.UserConfig.BASE_URI;
 
 public class RegistrationTest {
     WebDriver driver;
@@ -38,16 +41,19 @@ public class RegistrationTest {
     @Test
     public void registrationNegativeTest() {
         pwd = UserConfig.getRandomString(5);
-        HeaderItems header = new Header(driver);
-        header.clickYourAccount()
-                .clickRegistrationButton()
-                .register(name, email, pwd);
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-        assertTrue(registrationPage.isPwdErrorVisible());
+        RegistrationPage registrationPage= new Header(driver)
+                .clickYourAccount()
+                .clickRegistrationButton();
+                registrationPage.register(name, email, pwd);
+        assertTrue(new RegistrationPage(driver).isPwdErrorVisible());
     }
 
     @AfterEach
     public void tearDown() {
         driver.quit();
+        RestAssured.baseURI = BASE_URI;
+        ValidatableResponse login = UserConfig.login(email, pwd);
+        String accessToken = UserConfig.getAccessToken(login);
+        UserConfig.deleteUser(accessToken);
     }
 }

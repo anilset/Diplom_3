@@ -11,6 +11,7 @@ import static io.restassured.RestAssured.given;
 public class UserConfig {
     public static final String URL = "https://stellarburgers.nomoreparties.site/";
     public static final String REGISTER_PATH = "auth/register";
+    public static final String LOGIN_PATH = "auth/login";
     public static final String USER_PATH = "auth/user";
     public static final String BASE_URI = "https://stellarburgers.nomoreparties.site/api/";
 
@@ -34,6 +35,16 @@ public class UserConfig {
                 .body(new User(login, password, name))
                 .when()
                 .post(REGISTER_PATH)
+                .then();
+    }
+
+    public static ValidatableResponse login(String login, String password){
+        return given()
+                .contentType(ContentType.JSON)
+                .and()
+                .body(new User(login, password))
+                .when()
+                .post(LOGIN_PATH)
                 .then();
     }
 

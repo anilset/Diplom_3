@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static site.nomoreparties.stellarburgers.pom.RegistrationPage.REGISTER_PAGE_HEADER;
+import static site.nomoreparties.stellarburgers.pom.ResetPwdPage.RESET_PWD_HEADER;
 
 public class LoginPage {
     private final WebDriver driver;
@@ -17,6 +18,8 @@ public class LoginPage {
     private final static By emailField = By.name("name");
     private final By pwdField = By.name("Пароль");
     private final By enterButton = By.xpath("//*[text()='Войти']");
+
+    private final By resetPwdButton = By.xpath("//a[text()='Восстановить пароль']");
 
     final By registrationButton = By.xpath("//a[text()='Зарегистрироваться']");
 
@@ -32,6 +35,15 @@ public class LoginPage {
                 .until(ExpectedConditions.visibilityOfElementLocated(REGISTER_PAGE_HEADER));
         return new RegistrationPage(driver);
     }
+
+    public ResetPwdPage clickResetPwdButton() {
+        driver.findElement(resetPwdButton).isEnabled();
+        driver.findElement(resetPwdButton).click();
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.visibilityOfElementLocated(RESET_PWD_HEADER));
+        return new ResetPwdPage(driver);
+    }
+
     public LoginPage inputEmail(String email){
         driver.findElement(emailField).sendKeys(email);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
