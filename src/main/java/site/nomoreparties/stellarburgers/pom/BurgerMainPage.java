@@ -20,6 +20,7 @@ public class BurgerMainPage {
     }
 
     public LoginPage enterAccountFromMain(){
+        driver.findElement(enterAccountButton).isEnabled();
         driver.findElement(enterAccountButton).click();
         return new LoginPage(driver);
     }

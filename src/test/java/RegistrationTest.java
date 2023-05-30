@@ -54,7 +54,9 @@ public class RegistrationTest {
         driver.quit();
         RestAssured.baseURI = BASE_URI;
         ValidatableResponse login = UserConfig.login(email, pwd);
-        String accessToken = UserConfig.getAccessToken(login);
-        UserConfig.deleteUser(accessToken);
+        if(login.extract().statusCode() == 200) {
+            String accessToken = UserConfig.getAccessToken(login);
+            UserConfig.deleteUser(accessToken);
+        }
     }
 }

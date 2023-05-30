@@ -92,8 +92,8 @@ public class LoginAccountTest {
     public void logOutTest() {
         new Header(driver)
                 .clickYourAccount()
-                .login(login, pwd)
-                .enterAccountFromMain();
+                .login(login, pwd);
+        new Header(driver).clickYourAccount();
         Boolean isLoggerOut = new AccountPage(driver)
                 .clickLogoutButton()
                 .isLoginPageVisible();
