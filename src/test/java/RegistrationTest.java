@@ -2,13 +2,12 @@ import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import site.nomoreparties.stellarburgers.config.UserConfig;
 import site.nomoreparties.stellarburgers.extensions.WevDriverFactory;
-import site.nomoreparties.stellarburgers.pom.AccountPage;
 import site.nomoreparties.stellarburgers.pom.Header;
-import site.nomoreparties.stellarburgers.pom.HeaderItems;
 import site.nomoreparties.stellarburgers.pom.RegistrationPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -29,6 +28,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @DisplayName("Проверка регистрации")
     public void registrationPositiveTest() {
         Boolean isRegistered = new Header(driver)
                 .clickYourAccount()
@@ -39,6 +39,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @DisplayName("Проверка невозможности регистрации и ошибки с паролем длиной менее 6 символов")
     public void registrationNegativeTest() {
         pwd = UserConfig.getRandomString(5);
         RegistrationPage registrationPage= new Header(driver)

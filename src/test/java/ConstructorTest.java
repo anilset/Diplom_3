@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import site.nomoreparties.stellarburgers.extensions.WevDriverFactory;
@@ -16,6 +17,7 @@ public class ConstructorTest {
     }
 
     @Test
+    @DisplayName("Проверка прехода в раздел Конструктора Соусы ")
     public void saucesFocusTest() {
         String focusedElement = new BurgerMainPage(driver)
                 .selectSauces()
@@ -24,6 +26,7 @@ public class ConstructorTest {
     }
 
     @Test
+    @DisplayName("Проверка прехода в раздел Конструктора Начинки")
     public void fillingsFocusTest() {
         String focusedElement = new BurgerMainPage(driver)
                 .selectFillings()
@@ -32,6 +35,7 @@ public class ConstructorTest {
     }
 
     @Test
+    @DisplayName("Проверка, что при открытии главной страницы раздел Конструктора Булки активен")
     public void bunsFocusTestByDefault() {
         String focusedElement = new BurgerMainPage(driver)
                 .getElementInFocus();
@@ -39,6 +43,7 @@ public class ConstructorTest {
     }
 
     @Test
+    @DisplayName("Проверка прехода в раздел Конструктора Булки")
     public void bunsFocusTest() {
         String focusedElement = new BurgerMainPage(driver)
                 .selectFillings()

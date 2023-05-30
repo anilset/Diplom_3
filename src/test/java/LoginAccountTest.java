@@ -34,6 +34,7 @@ public class LoginAccountTest {
     }
 
     @Test
+    @DisplayName("Проверка логина с главной страницы")
     public void loginFromHomePageTest(){
         Boolean isLoggedIn = new BurgerMainPage(driver)
                 .enterAccountFromMain()
@@ -43,6 +44,7 @@ public class LoginAccountTest {
     }
 
     @Test
+    @DisplayName("Проверка логина из личного кабинета")
     public void loginFromAccountPage(){
         Boolean isLoggedIn = new Header(driver)
                 .clickYourAccount()
@@ -52,6 +54,7 @@ public class LoginAccountTest {
     }
 
     @Test
+    @DisplayName("Проверка логина через кнопку Войти Формы регистрации")
     public void loginFromRegistrationPage(){
         Boolean isLoggedIn = new Header(driver)
                 .clickYourAccount()
@@ -63,6 +66,7 @@ public class LoginAccountTest {
     }
 
     @Test
+    @DisplayName("Проверка логина через кнопку Войти Формы восстановления пароля")
     public void loginFromPwdResetPage(){
         Boolean isLoggedIn = new Header(driver)
                 .clickYourAccount()
@@ -74,15 +78,17 @@ public class LoginAccountTest {
     }
 
     @Test
+    @DisplayName("Проверка перехода в личный кабинет")
     public void accountPageTransferTest(){
-        new Header(driver)
-                .clickYourAccount()
+        HeaderItems header = new Header(driver);
+                header.clickYourAccount()
                 .login(login, pwd);
-        new Header(driver).clickYourAccount();
+        header.clickYourAccount();
         assertTrue(new AccountPage(driver).isProfileVisible());
     }
 
     @Test
+    @DisplayName("Проверка выхода из аккаунта в личном кабинете")
     public void logOutTest() {
         new Header(driver)
                 .clickYourAccount()
@@ -95,6 +101,7 @@ public class LoginAccountTest {
     }
 
     @Test
+    @DisplayName("Проверка перехода на страницу конструктора по клику на лого из личного кабинета")
     public void accountPageLogoClickTest(){
         HeaderItems header = new Header(driver);
         header.clickYourAccount();
@@ -105,6 +112,7 @@ public class LoginAccountTest {
     }
 
     @Test
+    @DisplayName("Проверка перехода на страницу конструктора по клику на конструктор из личного кабинета")
     public void accountPageConstructorClickTest(){
         HeaderItems header = new Header(driver);
         header.clickYourAccount();
