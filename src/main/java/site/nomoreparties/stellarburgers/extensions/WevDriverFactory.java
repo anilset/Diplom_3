@@ -7,6 +7,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 import static site.nomoreparties.stellarburgers.config.UserConfig.URL;
 import static site.nomoreparties.stellarburgers.pom.Header.LOGO;
 
@@ -28,7 +30,7 @@ public class WevDriverFactory {
                     throw new RuntimeException("This browser is not supported yet");
             }
             driver.navigate().to(URL);
-            new WebDriverWait(driver, 10)
+            new WebDriverWait(driver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.visibilityOfElementLocated(LOGO));
             driver.manage().window().maximize();
             return driver;

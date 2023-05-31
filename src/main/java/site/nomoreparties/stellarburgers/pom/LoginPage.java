@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +32,7 @@ public class LoginPage {
     public RegistrationPage clickRegistrationButton() {
         driver.findElement(registrationButton).isEnabled();
         driver.findElement(registrationButton).click();
-        new WebDriverWait(driver, 5)
+        new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(REGISTER_PAGE_HEADER));
         return new RegistrationPage(driver);
     }
@@ -39,7 +40,7 @@ public class LoginPage {
     public ResetPwdPage clickResetPwdButton() {
         driver.findElement(resetPwdButton).isEnabled();
         driver.findElement(resetPwdButton).click();
-        new WebDriverWait(driver, 5)
+        new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(RESET_PWD_HEADER));
         return new ResetPwdPage(driver);
     }

@@ -11,7 +11,6 @@ import static site.nomoreparties.stellarburgers.config.UserConfig.BASE_URI;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LoginAccountTest {
-
     private WebDriver driver;
     private static String login;
     private static String pwd;
