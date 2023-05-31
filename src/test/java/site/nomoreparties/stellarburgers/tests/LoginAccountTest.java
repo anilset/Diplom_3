@@ -1,3 +1,5 @@
+package site.nomoreparties.stellarburgers.tests;
+
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.*;
