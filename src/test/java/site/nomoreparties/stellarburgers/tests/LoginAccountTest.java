@@ -47,7 +47,7 @@ public class LoginAccountTest {
     @Test
     @DisplayName("Проверка логина из личного кабинета")
     public void loginFromAccountPage(){
-        Boolean isLoggedIn = new Header(driver)
+        Boolean isLoggedIn = new HeaderItems(driver)
                 .clickYourAccount()
                 .login(login, pwd)
                 .isBurgerPageVisible();
@@ -57,7 +57,7 @@ public class LoginAccountTest {
     @Test
     @DisplayName("Проверка логина через кнопку Войти Формы регистрации")
     public void loginFromRegistrationPage(){
-        Boolean isLoggedIn = new Header(driver)
+        Boolean isLoggedIn = new HeaderItems(driver)
                 .clickYourAccount()
                 .clickRegistrationButton()
                 .clickEnterButton()
@@ -69,7 +69,7 @@ public class LoginAccountTest {
     @Test
     @DisplayName("Проверка логина через кнопку Войти Формы восстановления пароля")
     public void loginFromPwdResetPage(){
-        Boolean isLoggedIn = new Header(driver)
+        Boolean isLoggedIn = new HeaderItems(driver)
                 .clickYourAccount()
                 .clickResetPwdButton()
                 .clickEnterButton()
@@ -81,7 +81,7 @@ public class LoginAccountTest {
     @Test
     @DisplayName("Проверка перехода в личный кабинет")
     public void accountPageTransferTest(){
-        HeaderItems header = new Header(driver);
+        HeaderItems header = new HeaderItems(driver);
                 header.clickYourAccount()
                 .login(login, pwd);
         header.clickYourAccount();
@@ -91,20 +91,20 @@ public class LoginAccountTest {
     @Test
     @DisplayName("Проверка выхода из аккаунта в личном кабинете")
     public void logOutTest() {
-        new Header(driver)
+        new HeaderItems(driver)
                 .clickYourAccount()
                 .login(login, pwd);
-        new Header(driver).clickYourAccount();
-        Boolean isLoggerOut = new AccountPage(driver)
+        new HeaderItems(driver).clickYourAccount();
+        Boolean isLoggedOut = new AccountPage(driver)
                 .clickLogoutButton()
                 .isLoginPageVisible();
-        assertTrue(isLoggerOut);
+        assertTrue(isLoggedOut);
     }
 
     @Test
     @DisplayName("Проверка перехода на страницу конструктора по клику на лого из личного кабинета")
     public void accountPageLogoClickTest(){
-        HeaderItems header = new Header(driver);
+        HeaderItems header = new HeaderItems(driver);
         header.clickYourAccount();
         Boolean isTransferredToMain = header
                 .clickLogo()
@@ -115,7 +115,7 @@ public class LoginAccountTest {
     @Test
     @DisplayName("Проверка перехода на страницу конструктора по клику на конструктор из личного кабинета")
     public void accountPageConstructorClickTest(){
-        HeaderItems header = new Header(driver);
+        HeaderItems header = new HeaderItems(driver);
         header.clickYourAccount();
         Boolean isTransferredToMain = header
                 .clickConstructorButton()

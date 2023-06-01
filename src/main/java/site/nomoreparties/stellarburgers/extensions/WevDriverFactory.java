@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 import static site.nomoreparties.stellarburgers.config.UserConfig.URL;
-import static site.nomoreparties.stellarburgers.pom.Header.LOGO;
+import static site.nomoreparties.stellarburgers.pom.HeaderItems.LOGO;
 
 public class WevDriverFactory {
 
