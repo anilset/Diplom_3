@@ -6,5 +6,4 @@ public interface Header {
     BurgerMainPage clickConstructorButton();
 
     LoginPage clickYourAccount();
-
 }

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class RegistrationPage {
+public class RegistrationPage extends HeaderItems {
    private final WebDriver driver;
    final static By REGISTER_PAGE_HEADER = By.xpath("//h2[text()='Регистрация']");
    private final By nameField = By.xpath ("//fieldset[1]/div[1]/div[1]/input[1]");
@@ -17,7 +17,8 @@ public class RegistrationPage {
    private final  By registerButton = By.xpath("//button[text()='Зарегистрироваться']");
     private final By enterButton = By.xpath("//*[text()='Войти']");
    public RegistrationPage(WebDriver driver) {
-        this.driver = driver;
+       super(driver);
+       this.driver = driver;
     }
 
     public RegistrationPage inputName(String name){

@@ -6,9 +6,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class BurgerMainPage {
+public class BurgerMainPage extends HeaderItems {
     private final WebDriver driver;
-    private final By BURGER_PAGE_HEADER = By.xpath("//h1[text()='Соберите бургер']");
+    public static final By BURGER_PAGE_HEADER = By.xpath("//h1[text()='Соберите бургер']");
     private final By enterAccountButton = By.xpath("//button[text()='Войти в аккаунт']");
     private final By bunsButton = By.xpath("//span[text()='Булки']");
     private final By saucesButton = By.xpath("//span[text()='Соусы']");
@@ -16,6 +16,7 @@ public class BurgerMainPage {
     private final By focusedConstructorPart = By.xpath("//div[contains(@class,'current')]");
 
     public BurgerMainPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
 

@@ -1,15 +1,25 @@
 package site.nomoreparties.stellarburgers.tests;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import site.nomoreparties.stellarburgers.config.UserConfig;
-import site.nomoreparties.stellarburgers.extensions.WevDriverFactory;
-import site.nomoreparties.stellarburgers.pom.*;
+import site.nomoreparties.stellarburgers.pom.AccountPage;
+import site.nomoreparties.stellarburgers.pom.BurgerMainPage;
+import site.nomoreparties.stellarburgers.pom.HeaderItems;
 
+import java.time.Duration;
+
+import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static site.nomoreparties.stellarburgers.config.UserConfig.BASE_URI;
+import static site.nomoreparties.stellarburgers.config.UserConfig.URL;
+import static site.nomoreparties.stellarburgers.pom.HeaderItems.LOGO;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LoginAccountTest {
@@ -21,17 +31,22 @@ public class LoginAccountTest {
     private static String accessToken;
     @BeforeAll
     public void createUser() {
-        RestAssured.baseURI = BASE_URI;
+        baseURI = BASE_URI;
         login = UserConfig.getRandomLogin();
         pwd = UserConfig.getRandomPwd();
-        name = UserConfig.getRandomString(3);
+        name = UserConfig.getRandomString(9);
         createUser = UserConfig.createUser(login, pwd, name);
         accessToken = UserConfig.getAccessToken(createUser);
     }
 
     @BeforeEach
     public void setUp() {
-        driver = WevDriverFactory.getDriver();
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.navigate().to(URL);
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(LOGO));
+        driver.manage().window().maximize();
     }
 
     @Test
@@ -80,11 +95,11 @@ public class LoginAccountTest {
 
     @Test
     @DisplayName("Проверка перехода в личный кабинет")
-    public void accountPageTransferTest(){
-        HeaderItems header = new HeaderItems(driver);
-                header.clickYourAccount()
-                .login(login, pwd);
-        header.clickYourAccount();
+    public void accountPageTransferTest() {
+        new HeaderItems(driver)
+                .clickYourAccount()
+                .login(login, pwd)
+                .clickYourAccount();
         assertTrue(new AccountPage(driver).isProfileVisible());
     }
 
@@ -93,8 +108,8 @@ public class LoginAccountTest {
     public void logOutTest() {
         new HeaderItems(driver)
                 .clickYourAccount()
-                .login(login, pwd);
-        new HeaderItems(driver).clickYourAccount();
+                .login(login, pwd)
+                .clickYourAccount();
         Boolean isLoggedOut = new AccountPage(driver)
                 .clickLogoutButton()
                 .isLoginPageVisible();
@@ -103,10 +118,9 @@ public class LoginAccountTest {
 
     @Test
     @DisplayName("Проверка перехода на страницу конструктора по клику на лого из личного кабинета")
-    public void accountPageLogoClickTest(){
-        HeaderItems header = new HeaderItems(driver);
-        header.clickYourAccount();
-        Boolean isTransferredToMain = header
+    public void accountPageLogoClickTest() {
+        Boolean isTransferredToMain = new HeaderItems(driver)
+                .clickYourAccount()
                 .clickLogo()
                 .isBurgerPageVisible();
         assertTrue(isTransferredToMain);
@@ -114,10 +128,9 @@ public class LoginAccountTest {
 
     @Test
     @DisplayName("Проверка перехода на страницу конструктора по клику на конструктор из личного кабинета")
-    public void accountPageConstructorClickTest(){
-        HeaderItems header = new HeaderItems(driver);
-        header.clickYourAccount();
-        Boolean isTransferredToMain = header
+    public void accountPageConstructorClickTest() {
+        Boolean isTransferredToMain = new HeaderItems(driver)
+                .clickYourAccount()
                 .clickConstructorButton()
                 .isBurgerPageVisible();
         assertTrue(isTransferredToMain);
@@ -130,6 +143,8 @@ public class LoginAccountTest {
 
     @AfterAll
     public void deleteTestUser() {
-            UserConfig.deleteUser(accessToken);
+        ValidatableResponse loginByAPI = UserConfig.login(login, pwd);
+        accessToken = UserConfig.getAccessToken(loginByAPI);
+        UserConfig.deleteUser(accessToken);
     }
 }

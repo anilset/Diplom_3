@@ -5,11 +5,12 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class ResetPwdPage {
+public class ResetPwdPage extends HeaderItems{
     private final WebDriver driver;
     private final By enterButton = By.xpath("//*[text()='Войти']");
 
     public ResetPwdPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
 

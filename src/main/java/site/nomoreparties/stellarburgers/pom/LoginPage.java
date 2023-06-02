@@ -10,10 +10,11 @@ import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static site.nomoreparties.stellarburgers.pom.BurgerMainPage.BURGER_PAGE_HEADER;
 import static site.nomoreparties.stellarburgers.pom.RegistrationPage.REGISTER_PAGE_HEADER;
 import static site.nomoreparties.stellarburgers.pom.ResetPwdPage.RESET_PWD_HEADER;
 
-public class LoginPage {
+public class LoginPage extends HeaderItems {
     private final WebDriver driver;
     private final static By LOGIN_PAGE_HEADER = By.xpath("//h2[text()='Вход']");
     private final static By emailField = By.name("name");
@@ -26,6 +27,7 @@ public class LoginPage {
 
 
     public LoginPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
 
@@ -67,7 +69,7 @@ public class LoginPage {
         inputEmail(email);
         inputPwd(pwd);
         clickEnterButton();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        new WebDriverWait(driver, Duration.ofSeconds(5000)).until((webDriver -> driver.findElement(BURGER_PAGE_HEADER) != null));
         return new BurgerMainPage(driver);
     }
 

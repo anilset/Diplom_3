@@ -7,12 +7,13 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class AccountPage {
+public class AccountPage extends HeaderItems {
     private final WebDriver driver;
     private final By PROFILE_HEADER = By.xpath("//a[text()='Профиль']");
     private final By logoutButton = By.xpath("//button[text()='Выход']");
 
     public AccountPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
 

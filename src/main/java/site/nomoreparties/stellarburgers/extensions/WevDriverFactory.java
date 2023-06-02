@@ -15,8 +15,8 @@ import static site.nomoreparties.stellarburgers.pom.HeaderItems.LOGO;
 public class WevDriverFactory {
 
         public static WebDriver getDriver() {
-            String browserName = System.getenv().get("browser");
             WebDriver driver;
+            String browserName = System.getenv().get("browser");
             switch (browserName) {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
@@ -25,6 +25,10 @@ public class WevDriverFactory {
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
+                    break;
+                case "yandex":
+                    System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver");
+                    driver = new ChromeDriver();
                     break;
                 default:
                     throw new RuntimeException("This browser is not supported yet");
