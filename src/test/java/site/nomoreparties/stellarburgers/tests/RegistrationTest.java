@@ -61,7 +61,7 @@ public class RegistrationTest {
                 .clickYourAccount()
                 .clickRegistrationButton();
                 registrationPage.register(name, email, pwd);
-        assertTrue(new RegistrationPage(driver).isPwdErrorVisible());
+        assertTrue(registrationPage.isPwdErrorVisible());
     }
 
     @AfterEach
