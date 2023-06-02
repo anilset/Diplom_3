@@ -17,6 +17,10 @@ public class WevDriverFactory {
         public static WebDriver getDriver() {
             WebDriver driver;
             String browserName = System.getenv().get("browser");
+            if(browserName == null) {
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+            }
             switch (browserName) {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
