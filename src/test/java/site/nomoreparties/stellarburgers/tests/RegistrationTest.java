@@ -3,24 +3,17 @@ package site.nomoreparties.stellarburgers.tests;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import site.nomoreparties.stellarburgers.config.UserConfig;
-import site.nomoreparties.stellarburgers.extensions.WevDriverFactory;
-import site.nomoreparties.stellarburgers.pom.HeaderItems;
-import site.nomoreparties.stellarburgers.pom.RegistrationPage;
+import site.nomoreparties.stellarburgers.pom.*;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static site.nomoreparties.stellarburgers.config.UserConfig.BASE_URI;
-import static site.nomoreparties.stellarburgers.config.UserConfig.URL;
+import static site.nomoreparties.stellarburgers.config.UserConfig.*;
 import static site.nomoreparties.stellarburgers.pom.HeaderItems.LOGO;
 
 public class RegistrationTest {
