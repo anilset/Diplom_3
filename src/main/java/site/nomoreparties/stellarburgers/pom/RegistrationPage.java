@@ -61,7 +61,7 @@ public class RegistrationPage extends HeaderItems {
 
     public Boolean isPwdErrorVisible(){
         List<WebElement> error = driver.findElements(pwdError);
-        return error.size() >= 1;
+        return error.size() == 1;
     }
 
 }

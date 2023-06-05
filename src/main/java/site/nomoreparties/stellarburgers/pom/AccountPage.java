@@ -19,7 +19,7 @@ public class AccountPage extends HeaderItems {
 
     public Boolean isProfileVisible(){
         List<WebElement> profile = driver.findElements(PROFILE_HEADER);
-        return profile.size() >= 1;
+        return profile.size() == 1;
     }
 
     public LoginPage clickLogoutButton() {

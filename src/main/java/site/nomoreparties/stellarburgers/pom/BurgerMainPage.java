@@ -30,7 +30,7 @@ public class BurgerMainPage extends HeaderItems {
 
     public Boolean isBurgerPageVisible(){
         List<WebElement> makeBurger = driver.findElements(BURGER_PAGE_HEADER);
-        return makeBurger.size() >= 1;
+        return makeBurger.size() == 1;
     }
 
     public BurgerMainPage selectBuns(){

@@ -69,13 +69,13 @@ public class LoginPage extends HeaderItems {
         inputEmail(email);
         inputPwd(pwd);
         clickEnterButton();
-        new WebDriverWait(driver, Duration.ofSeconds(5000)).until((webDriver -> driver.findElement(BURGER_PAGE_HEADER) != null));
+        new WebDriverWait(driver, Duration.ofSeconds(5000)).until((webDriver -> driver.findElement(BURGER_PAGE_HEADER).getText() != null));
         return new BurgerMainPage(driver);
     }
 
     public Boolean isLoginPageVisible(){
         List<WebElement> loginHeader = driver.findElements(LOGIN_PAGE_HEADER);
-        return loginHeader.size() >= 1;
+        return loginHeader.size() == 1;
     }
 
 
