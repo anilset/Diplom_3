@@ -1,29 +1,18 @@
 package site.nomoreparties.stellarburgers.tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.*;
+import site.nomoreparties.stellarburgers.extensions.WevDriverFactory;
 import site.nomoreparties.stellarburgers.pom.BurgerMainPage;
 
-import java.time.Duration;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static site.nomoreparties.stellarburgers.config.UserConfig.URL;
-import static site.nomoreparties.stellarburgers.pom.HeaderItems.LOGO;
 
 public class ConstructorTest {
     WebDriver driver;
 
     @BeforeEach
     public void setUp(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.navigate().to(URL);
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(LOGO));
-        driver.manage().window().maximize();
+        driver = WevDriverFactory.getDriver();
     }
 
     @Test

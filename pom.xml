@@ -119,6 +119,14 @@
             <version>${selenium.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-selenide -->
         <dependency>
             <groupId>io.qameta.allure</groupId>

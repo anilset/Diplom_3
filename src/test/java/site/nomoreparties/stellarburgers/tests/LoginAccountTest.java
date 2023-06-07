@@ -1,20 +1,17 @@
 package site.nomoreparties.stellarburgers.tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.*;
 import site.nomoreparties.stellarburgers.config.UserConfig;
-import site.nomoreparties.stellarburgers.pom.*;
+import site.nomoreparties.stellarburgers.extensions.WevDriverFactory;
+import site.nomoreparties.stellarburgers.pom.AccountPage;
+import site.nomoreparties.stellarburgers.pom.BurgerMainPage;
+import site.nomoreparties.stellarburgers.pom.HeaderItems;
 
-import java.time.Duration;
-
-import static io.restassured.RestAssured.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static site.nomoreparties.stellarburgers.config.UserConfig.*;
-import static site.nomoreparties.stellarburgers.pom.HeaderItems.LOGO;
+import static io.restassured.RestAssured.baseURI;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static site.nomoreparties.stellarburgers.config.UserConfig.BASE_URI;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LoginAccountTest {
@@ -36,12 +33,7 @@ public class LoginAccountTest {
 
     @BeforeEach
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.navigate().to(URL);
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(LOGO));
-        driver.manage().window().maximize();
+        driver = WevDriverFactory.getDriver();
     }
 
     @Test
